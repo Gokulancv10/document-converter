@@ -1,0 +1,36 @@
+{% extends 'app/index.html' %}
+{% block content %}
+
+    <form action="{% url 'image_to_pdf' %}" method="post" enctype="multipart/form-data" class="image-to-pdf-form" id="imageToPDF">
+        {% csrf_token %}
+        <div class="image-pdf-input">
+            <input type="file" name="image" id="image" required accept="image/">
+            <label for="image">Select a file</label>
+            <p class="image-file" id="imageFile">
+            </p>
+        </div>
+        <button type="submit" class="btn btn-primary" id="formSubmit">Submit</button>
+    </form>
+
+    {% if img_path and image_name %}
+        <div class="image-download" id="imageDownload">
+            <p>Your pdf is ready</p>
+            <a href="{% url 'home' %}{{ img_path }}" download="{{ image_name }}">
+                Download
+            </a>
+        </div>
+    {% endif %}
+
+    <script>
+        const image = document.getElementById("image");
+        const formSubmitBtn = document.getElementById("formSubmit");
+        const imageFile = document.getElementById("imageFile");
+
+        image.addEventListener("change", (e) => {
+            const [file] = e.target.files;
+            const file_name = file.name;
+        });
+
+    </script>
+
+{% endblock %}

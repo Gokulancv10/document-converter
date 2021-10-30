@@ -1,0 +1,51 @@
+@import "main.css";
+
+form .image-pdf-input {
+    text-align: center;
+}
+
+form .image-file {
+    font-size: small;
+    font-weight: 500;
+    color: black;
+    /* display: none; */
+}
+
+.image-download {
+    padding: .5rem;
+    width: 400px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+.image-download p {
+    font-size: medium;
+    font-weight: 500;
+}
+
+.image-download a {
+    width: 150px;
+    border: 1px solid var(--white);
+    border-radius: 5px;
+    padding: .5em 1.5em;
+    cursor: pointer;
+    background-color: var(--bs-primary);
+    color: #fff;
+    border: 1px solid #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.image-download a:hover {
+    background-color: var(--white);
+    color: var(--bs-primary);
+    border: 1px solid var(--bs-primary);
+}
+
+.conversion-message {
+    font-size: small;
+}
