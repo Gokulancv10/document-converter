@@ -23,7 +23,7 @@ form .image-file {
 }
 
 .image-download p {
-    font-size: medium;
+    font-size: small;
     font-weight: 500;
 }
 
@@ -44,8 +44,4 @@ form .image-file {
     background-color: var(--white);
     color: var(--bs-primary);
     border: 1px solid var(--bs-primary);
-}
-
-.conversion-message {
-    font-size: small;
 }
