@@ -1,0 +1,37 @@
+{% extends 'app/index.html' %}
+{% block content %}
+
+    <form action="{% url 'doc_to_pdf' %}" method="post" enctype="multipart/form-data"
+        class="doc-to-pdf-form" id="docToPDF">
+        {% csrf_token %}
+        <div class="image-pdf-input">
+            <input type="file" name="doc" id="doc" required
+            accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            <label for="doc">Select a file</label>
+            <p class="doc-filename" id="docFileName">
+            </p>
+        </div>
+        <button type="submit" class="btn btn-primary" id="formSubmit">Submit</button>
+    </form>
+
+    {% if converted_pdf and pdf_name %}
+        <div class="doc-download" id="docDownload">
+            <p class="conversion-message">Your pdf is ready</p>
+            <a href="{% url 'home' %}{{ converted_pdf }}" download="{{ pdf_name }}">
+                Download
+            </a>
+        </div>
+    {% endif %}
+
+    <script>
+        const docInput = document.getElementById("doc");
+        const formSubmitBtn = document.getElementById("formSubmit");
+        const docFileName = document.getElementById("docFile");
+
+        image.addEventListener("change", (e) => {
+            const [file] = e.target.files;
+            const file_name = file.name;
+        });
+    </script>
+
+{% endblock %}
