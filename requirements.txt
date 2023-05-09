@@ -2,3 +2,4 @@ comtypes==1.1.10
 Django==3.2.8
 djangorestframework==3.12.4
 Pillow==8.4.0
+mysqlclient==2.0.1

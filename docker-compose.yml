@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_PORT: "3306"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: document-converter-local
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3305:3306"
+    volumes:
+      - document_converter_mysql:/var/lib/mysql
+    networks:
+      - document_converter_network
+    healthcheck:
+      test: "/usr/bin/mysql --user=$${MYSQL_USER} --password=$${MYSQL_ROOT_PASSWORD} --execute \"SHOW DATABASES;\""
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  django:
+    image: document_converter
+    # build: .
+    command: sh -c "python manage.py migrate  && python manage.py runserver 0.0.0.0:8000"
+    container_name: document_converter
+    volumes:
+      - .:/home/app
+    ports:
+      - "8000:8000"
+    networks:
+      - document_converter_network
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    restart: on-failure
+
+networks:
+  document_converter_network:
+
+volumes:
+  document_converter_mysql:
